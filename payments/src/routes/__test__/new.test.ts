@@ -71,6 +71,7 @@ it('returns a 201 when adding a payment', async() => {
             status: OrderStatus.Created,
             price
         });   
+    await order.save();
 
     await request(app).post('/api/payments')
         .set('Cookie', global.signin(userId))
