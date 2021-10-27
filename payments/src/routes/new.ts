@@ -15,7 +15,7 @@ router.post('/api/payments',
         body('token')
         .not()
         .isEmpty(),
-        body('token')
+        body('orderId')
         .not()
         .isEmpty()
     ],
@@ -48,7 +48,7 @@ router.post('/api/payments',
             stripeId: charge.id
         });
         await payment.save();
-        
+
         new PaymentCreatedPublisher(natsClient.client).publish({
             id: payment.id,
             orderId: payment.orderId,
