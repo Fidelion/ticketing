@@ -20,6 +20,7 @@ it('returns an error if the ticket does not exist', async() => {
 it('returns an error if the ticket is already reserved', async() => {
     const cookie = await authCookie();
     const ticket = await Ticket.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
         title: "Concert",
         price: 303
     });
@@ -39,6 +40,7 @@ it('returns an error if the ticket is already reserved', async() => {
 
 it('submits order successfully', async() => {
     const ticket = await Ticket.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
         title: "Concert",
         price: 322
     });
@@ -49,6 +51,7 @@ it('submits order successfully', async() => {
 
 it('invokes mock function for calling created order event', async() => {
     const ticket = await Ticket.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
         title: "Concert",
         price: 322
     });

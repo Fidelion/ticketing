@@ -32,6 +32,8 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
             ticket: {
                 id: order.ticket.id
             }
-        })
+        });
+
+        msg.ack();
     }
 }
