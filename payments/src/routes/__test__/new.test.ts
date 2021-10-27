@@ -6,7 +6,7 @@ import { Order } from "../../models/order";
 import { Payment } from "../../models/payment";
 import { stripe } from "../../stripe";
 
-
+jest.mock('../stripe');
 // process.env.STRIPE_KEY = "sk_test_51GcSvuCyYW8raZL5Yu93gSmqLH7S3TT4zyMhtzgU0ot6zAo9e0XRJNz1ZiLIXcvApsrxJMHTjQ0NpFykLvv4tjSQ0088k88eOa";
 
 it('returns 404 when purchasing an order that does not exist', async() => {
