@@ -63,7 +63,7 @@ it('returns 400 error when trying to purchase an order that has been cancelled',
 
 it('returns a 201 when adding a payment', async() => {
     const userId = new mongoose.Types.ObjectId().toHexString();
-    const price = Math.floor(Math.random() * 100);
+    const price = Math.floor(Math.random() * 100000);
     const order = Order.build({
             id: new mongoose.Types.ObjectId().toHexString(),
             userId,
@@ -77,7 +77,7 @@ it('returns a 201 when adding a payment', async() => {
         .send({
             token: 'tok_visa',
             orderId: order.id
-        });
+        }).expect(201);
     
     const stripeCharges = await stripe.charges.list({
         limit: 50
