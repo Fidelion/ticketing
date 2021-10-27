@@ -33,7 +33,7 @@ router.post('/api/payments',
             throw new NotAuthorizedError();
         }
 
-        if(order.status === OrderStatus!.Cancelled) {
+        if(order.status === OrderStatus.Cancelled) {
             throw new BadRequestError("Cannot create payment for cancelled order");
         }
 
@@ -47,7 +47,8 @@ router.post('/api/payments',
             orderId,
             stripeId: charge.id
         });
-
+        await payment.save();
+        
         new PaymentCreatedPublisher(natsClient.client).publish({
             id: payment.id,
             orderId: payment.orderId,
