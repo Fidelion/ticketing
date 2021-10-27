@@ -15,7 +15,7 @@ router.post('/api/payments',
         body('token')
         .not()
         .isEmpty(),
-        body('token')
+        body('orderId')
         .not()
         .isEmpty()
     ],
@@ -33,7 +33,7 @@ router.post('/api/payments',
             throw new NotAuthorizedError();
         }
 
-        if(order.status === OrderStatus!.Cancelled) {
+        if(order.status === OrderStatus.Cancelled) {
             throw new BadRequestError("Cannot create payment for cancelled order");
         }
 
@@ -47,6 +47,7 @@ router.post('/api/payments',
             orderId,
             stripeId: charge.id
         });
+        await payment.save();
 
         new PaymentCreatedPublisher(natsClient.client).publish({
             id: payment.id,
@@ -54,7 +55,7 @@ router.post('/api/payments',
             stripeId: payment.stripeId
         });
 
-        res.send({ success: true });
+        res.status(201).send({ id: payment.id });
 });
 
 export { router as createPaymentRouter };

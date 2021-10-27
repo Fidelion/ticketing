@@ -46,7 +46,7 @@ it('acks the message', async() => {
     const { listener, data, msg } = await setup();
 
     //call the onMessage function with data and message properties
-    listener.onMessage(data, msg);
+    await listener.onMessage(data, msg);
 
     //write assertions to check if ack function was called
     expect(msg.ack).toHaveBeenCalled();
