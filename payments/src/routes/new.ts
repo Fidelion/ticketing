@@ -54,7 +54,7 @@ router.post('/api/payments',
             stripeId: payment.stripeId
         });
 
-        res.send({ success: true });
+        res.status(201).send({ id: payment.id });
 });
 
 export { router as createPaymentRouter };
