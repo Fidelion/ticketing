@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 let mongodb: any;
 
 jest.mock('../nats-client');
+jest.mock('../stripe');
 
 declare global {
     var signin: (id?: string) => string[];
