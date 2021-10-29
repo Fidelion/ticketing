@@ -7,7 +7,7 @@ import { ExpirationCompleteListener } from './events/listeners/expiration-comple
 import { PaymentCreatedListener } from './events/listeners/payment-created-listener';
 
 const start = async () => {
-  console.log("Starting...");
+  console.log("Starting....");
   if (!process.env.JWT_KEY) {
     throw new Error('JWT_KEY must be defined');
   }
@@ -41,7 +41,7 @@ const start = async () => {
     new TicketUpdatedListener(natsClient.client).listen();
     new ExpirationCompleteListener(natsClient.client).listen();
     new PaymentCreatedListener(natsClient.client).listen();
-    
+
     await mongoose.connect(process.env.MONGO_URI);
     console.log('Connected to MongoDb');
   } catch (err) {
