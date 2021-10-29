@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: us.gcr.io/ticketing-dev-328512/client
+          image: fidelion/client
 ---
 apiVersion: v1
 kind: Service
